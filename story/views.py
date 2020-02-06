@@ -101,3 +101,4 @@ def index(request):
             message = "There was a problem. Please try again."
 
     return HttpResponse(message)
+    sys.exit()
