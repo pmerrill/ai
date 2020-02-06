@@ -19,8 +19,6 @@ from GPT2.encoder import get_encoder
 # Create your views here.
 def index(request):
 
-    {% load bootstrap4 %}
-
     def text_generator(state_dict, param_prompt, param_nsamples, param_batch_size, param_length, param_temperature, param_top_k):
 
         #param_prompt = "Peter was a man"
