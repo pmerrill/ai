@@ -109,8 +109,10 @@ def index(request):
     else:
         message = "Issue: There was a problem. The AI Model was not found. Please come back later."
 
-    page = get_template('index.html')
-    #return HttpResponse(message)
-    return render(request, page, {"response": message, "prompt": param_prompt, 'samples': param_nsamples, 'batch_size': param_batch_size, 'length': param_length, 'temperature': param_temperature, 'top_k': param_top_k})
-
+    try:
+        page = get_template('index.html')
+        #return HttpResponse(message)
+        return render(request, page, {"response": message, "prompt": param_prompt, 'samples': param_nsamples, 'batch_size': param_batch_size, 'length': param_length, 'temperature': param_temperature, 'top_k': param_top_k})
+    except Exception as ex:
+        return HttpResponse(ex)
     sys.exit()
