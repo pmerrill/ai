@@ -111,7 +111,7 @@ def index(request):
 
     #try:
     #    page = get_template('index.html')
-        return HttpResponse(message)
+    return HttpResponse(message)
         #return render(request, page, {"response": message, "prompt": param_prompt, 'samples': param_nsamples, 'batch_size': param_batch_size, 'length': param_length, 'temperature': param_temperature, 'top_k': param_top_k})
     #except Exception as ex:
     #    return HttpResponse(ex)
