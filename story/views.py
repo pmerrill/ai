@@ -19,4 +19,5 @@ from GPT2.encoder import get_encoder
 # Create your views here.
 def index(request):
 
-    return str("hey")
+    test = str(request.GET.get('p', ''))
+    return str(test)
