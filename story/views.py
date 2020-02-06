@@ -19,5 +19,9 @@ from GPT2.encoder import get_encoder
 # Create your views here.
 def index(request):
 
-    test = str(request.GET.get('p', ''))
+    test = 'no'
+
+    if os.path.exists('gpt2-pytorch_model.bin'):
+        test = str(request.GET.get('p', ''))
+
     return HttpResponse(str(test))
