@@ -48,7 +48,35 @@ def index(request):
         model.to(device)
         model.eval()
 
-        return param_prompt + str('... worked!')
+        if param_length == -1:
+            param_length = config.n_ctx // 2
+        elif param_length > config.n_ctx:
+            raise ValueError("Can't get samples longer than window size: %s" % config.n_ctx)
+
+        response = param_prompt
+        #print(param_prompt)
+        context_tokens = enc.encode(param_prompt)
+
+        generated = 0
+        for _ in range(param_nsamples // param_batch_size):
+            out = sample_sequence(
+                model=model, length=param_length,
+                context=context_tokens  if not  param_unconditional else None,
+                start_token=enc.encoder['<|endoftext|>'] if param_unconditional else None,
+                batch_size=param_batch_size,
+                temperature=param_temperature, top_k=param_top_k, device=device
+            )
+            out = out[:, len(context_tokens):].tolist()
+            for i in range(param_batch_size):
+                generated += 1
+                text = enc.decode(out[i])
+                if param_quiet is False:
+                    response = "=" * 40 + " SAMPLE " + str(generated) + " " + "=" * 40
+                    #return("=" * 40 + " SAMPLE " + str(generated) + " " + "=" * 40)
+                response = param_prompt + text
+                #return(text)
+
+        return response
 
     message = 'Error'
 
