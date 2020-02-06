@@ -19,6 +19,8 @@ from GPT2.encoder import get_encoder
 # Create your views here.
 def index(request):
 
+    {% load bootstrap4 %}
+
     def text_generator(state_dict, param_prompt, param_nsamples, param_batch_size, param_length, param_temperature, param_top_k):
 
         #param_prompt = "Peter was a man"
@@ -109,5 +111,8 @@ def index(request):
     else:
         message = "Issue: There was a problem. The AI Model was not found. Please come back later."
 
-    return HttpResponse(message)
+    page = get_template('index.html')
+    #return HttpResponse(message)
+    return render(request, page, {"response": message, "prompt": param_prompt, 'samples': param_nsamples, 'batch_size': param_batch_size, 'length': param_length, 'temperature': param_temperature, 'top_k': param_top_k})
+
     sys.exit()
