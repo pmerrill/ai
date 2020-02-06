@@ -20,4 +20,4 @@ from GPT2.encoder import get_encoder
 def index(request):
 
     test = str(request.GET.get('p', ''))
-    return str(test)
+    return HttpResponse(str(test))
