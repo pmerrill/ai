@@ -107,4 +107,5 @@ def index(request):
     else:
         message = "Issue: There was a problem. The AI Model was not found. Please come back later."
 
-    return render(request, "index.html", {"response": message, "prompt": param_prompt, 'samples': param_nsamples, 'batch_size': param_batch_size, 'length': param_length, 'temperature': param_temperature, 'top_k': param_top_k})
+    print(message)
+    #return render(request, "index.html", {"response": message, "prompt": param_prompt, 'samples': param_nsamples, 'batch_size': param_batch_size, 'length': param_length, 'temperature': param_temperature, 'top_k': param_top_k})
