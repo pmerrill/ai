@@ -19,4 +19,4 @@ from GPT2.encoder import get_encoder
 # Create your views here.
 def index(request):
 
-    print("hey")
+    return "hey"

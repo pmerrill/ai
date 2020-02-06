@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="jumbotron text-center rounded-0">
+  <div class="container">
+    <h1>AI Playground</h1>
+    <p class="bg-light border rounded text-dark text-left p-3">{{ response }}</p>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mx-auto mb-5">
+      <h3>Create a Story</h3>
+      <p class="text-secondary">Have the AI generate a story based on your prompt.</p>
+      <form method="GET">{% csrf_token %}
+        <div class="form-group">
+          <label for="p">Writing Prompt</label>
+          <textarea class="form-control" id="p" name="p" rows="4" required autofocus placeholder="It is 1850 and you are a lumberjack in the remote Alaskan wilderness. You are heading home after a hard day's work when you hear a sound coming from the bushes on the side of the road."></textarea>
+          <small class="form-text text-muted">The more detailed you are the more accurate and interesting the story will be.</small>
+        </div>
+        <div class="form-group">
+          <label for="l">Sentences</label>
+          <input type="text" class="form-control" id="l" name="l" placeholder="Default: 25" value="{{ length }}">
+          <small class="form-text text-muted">Enter the number of sentences you want the AI to generate.</small>
+        </div>
+        <div class="form-group">
+          <label for="v">Variance</label>
+          <input type="number" class="form-control" id="v" name="v" placeholder="Default: 0.95" value="{{ temperature }}">
+          <small class="form-text text-muted">This is how closely the AI will stick to the original story. Enter a number to customize the variance. The greater the number the greater the variance.</small>
+        </div>
+        <div class="form-group">
+          <label for="i">Intelligence</label>
+          <input type="text" class="form-control" id="i" name="i" placeholder="Default: 50000" value="{{ top_k }}">
+          <small class="form-text text-muted">Customize how "intelligent" the AI is. The max number is 50,000. The lower the value the weirder the story might be. Lower values also tend to result in repeated sentences and a lack of overall quality.</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Generate Story</button>
+      </form>
+    </div>
+  </div> <!-- row -->
+</div>
+{% endblock %}
